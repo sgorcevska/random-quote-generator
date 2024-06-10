@@ -1,0 +1,85 @@
+body{
+  background-image: url("../images/stripes-background-colorful-1424887944bnM.jpg");
+  font-family: cursive;
+  color:rgb(163, 85, 163);
+}
+.all{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#random-quote{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+#randomQuote{
+    max-width: 20vw;
+}
+h1{
+    background-color: #d2d9f5;
+    color:rgb(163, 85, 163);
+    padding: 20px;
+    border-radius: 15px;
+}
+button{
+    font-family: cursive;
+    background-color:#ebb3b2 ;
+    color:rgb(163, 85, 163);
+    font-weight: bold;
+    padding: 8px;
+    font-size: 14px;
+    /* border: 4px #e78583 solid; */
+}
+button:hover{
+    cursor: pointer;
+}
+#print-random-quote,#all-quotes-p, #new-created{
+    background: rgba(193, 205, 255, 0.5);
+    /* background-color: #C1CDFF; */
+    backdrop-filter: blur(5px);
+    padding: 10px;
+}
+#print-all-quotes, #display-all-quotes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+#error-message{
+    color: red;
+    background-color: wheat;
+    text-align: center;
+    padding: 5px;
+}
+input{
+    background-color: #90d9db;
+    padding: 10px;
+    color:rgb(163, 85, 163);
+    font-weight: bold;
+    font-family: cursive;
+}
+#print-random-quote, #add-new-quote, #print-all-quotes{
+    margin-top: 40px;
+}
+h1, input, button{
+    box-shadow: rgba(0, 0, 0, 0.4) -5px 5px, rgba(0, 0, 0, 0.3) -10px 10px;
+    border-bottom: 5px black solid;
+    border-left: 5px black solid;
+}
+#add-new-quote{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+}
+p{
+    border: 1px solid black;
+}
+#new-div{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}

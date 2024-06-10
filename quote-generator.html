@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="author" content="Sara Gorcevska">
+        <link rel="stylesheet" href="../css/quote-generator.css">
+        <title>Quote Generator</title>
+    </head>
+    <body>
+        <div class="all">
+
+        <h1>Random Quote Generator</h1>
+
+        <div id="random-quote">
+            <button id="randomQuote">Generate Quote</button>
+            <div id="generate-quote"></div>
+            <!-- <p id="print-random-quote"></p> -->
+        </div>
+
+        <div id="new-div">
+            <div id="add-new-quote">
+                <input type="text" id="forNewQuote">
+                <span>by</span>
+                <input type="text" id="forNewAuthor">
+                <button id="newQuote">Add new quote</button>
+           </div> 
+           <div id="print-new-quote"></div>
+        </div>
+
+        <div id="print-all-quotes">
+            <button id="allQuotes">Print All</button>
+            <div id="display-all-quotes"></div>
+        </div>
+        </div>
+
+        <script>
+
+            const api1 = "https://dummyjson.com/quotes";
+            let quotes = [];
+
+            async function fetchInitialQuotes() {
+                try {
+                    const response = await fetch(api1);
+                    const data = await response.json();
+                    quotes = data.quotes;
+                } catch (error) {
+                    console.log('Failed to fetch initial quotes:', error);
+                }
+            }
+
+            fetchInitialQuotes();
+
+            document.getElementById("newQuote").addEventListener("click", () => {
+                    let quoteInput = document.getElementById("forNewQuote").value;
+                    let authorInput = document.getElementById("forNewAuthor").value;
+
+                    if (quoteInput === "" || authorInput === "") {
+                        console.log('Please enter both a quote and an author.');
+                        if (!document.getElementById("error-message")) {
+                            let errorMessage = document.createElement("p");
+                            errorMessage.id = "error-message";
+                            errorMessage.innerText = 'Please enter both a quote and an author.';
+                            document.getElementById("print-new-quote").appendChild(errorMessage);
+                        }
+                        return;
+                    } else {
+                        let errorMessage = document.getElementById("error-message");
+                        if (errorMessage) {
+                            errorMessage.remove();
+                        }
+                    }
+
+
+                    let newId = quotes.length + 1;
+
+                    let newQuote = {
+                        id: newId,
+                        quote: quoteInput,
+                        author: authorInput
+                    };
+
+                    quotes.push(newQuote);
+
+                    let newQuoteDisplay = document.createElement("p");
+                    newQuoteDisplay.setAttribute("id","new-created")
+                    newQuoteDisplay.innerText = `New quote added: ${quoteInput} by ${authorInput}`;
+                    document.getElementById("print-new-quote").appendChild(newQuoteDisplay);
+            });
+
+            document.getElementById("randomQuote").addEventListener('click', () => {
+                    if (quotes.length > 0) {
+                        let randomIndex = Math.floor(Math.random() * quotes.length);
+                        let randomQuote = quotes[randomIndex];
+
+                        let random = document.createElement("p")
+                        random.setAttribute("id", "print-random-quote")
+
+                        document.getElementById("generate-quote").innerHTML=""
+
+                        random.innerText = `${randomQuote.quote} by ${randomQuote.author}`;
+                        document.getElementById("generate-quote").appendChild(random)
+
+                    } else {
+                        console.log('No quotes available');
+                    }
+            });
+
+            document.getElementById("allQuotes").addEventListener('click', () => {
+                    let allQuotesPrinted = document.getElementById("display-all-quotes");
+                    allQuotesPrinted.innerHTML = "";
+
+                    if (quotes.length > 0) {
+                        quotes.forEach(quote => {
+                            let quoteDisplay = document.createElement("p");
+                            quoteDisplay.setAttribute("id","all-quotes-p")
+                            quoteDisplay.innerText = `${quote.quote} by ${quote.author}`;
+                            allQuotesPrinted.appendChild(quoteDisplay);
+                        });
+                    } else {
+                        console.log('No quotes available');
+                    }
+            });
+        </script>
+    </body>
+</html>
