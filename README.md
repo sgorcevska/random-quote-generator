@@ -1,1 +1,1 @@
-# About my first project on GitHub.
+# About my random quote generator project on GitHub.
